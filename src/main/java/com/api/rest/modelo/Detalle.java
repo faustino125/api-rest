@@ -11,13 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  *
@@ -26,14 +23,18 @@ import lombok.Setter;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
 @Entity
-@Table(name = "CATEGORIA")
-public class Categoria implements Serializable {
+@Table(name = "DETALLE")
+public class Detalle implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(name = "NOMBRE", nullable = false, length = 32)
-    private String nombre;
-    @Column(name = "DESCRIPCION",nullable = false, length = 32)
-    private String descripcion;
-    /*@OneToMany(mappedBy = "categoria")
-    private Set<Producto> producto;*/
+    @Column(name = "CANTIDAD",nullable = false)
+    private Integer cantidad;
+    @Column(name = "PRECIO",nullable = false)
+    private float precio;
+    @ManyToOne
+    @JoinColumn(name = "PRODUCTO_ID")
+    private Producto producto;
+    @ManyToOne
+    @JoinColumn(name = "FACTURA_ID")
+    private Factura factura;
 }

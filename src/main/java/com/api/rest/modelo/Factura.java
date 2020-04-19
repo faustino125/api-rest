@@ -5,35 +5,32 @@
  */
 package com.api.rest.modelo;
 
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-/**
- *
- * @author FAUSTINO
- */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
 @Entity
-@Table(name = "CATEGORIA")
-public class Categoria implements Serializable {
+@Table(name = "FACTURA")
+public class Factura implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(name = "NOMBRE", nullable = false, length = 32)
-    private String nombre;
-    @Column(name = "DESCRIPCION",nullable = false, length = 32)
-    private String descripcion;
-    /*@OneToMany(mappedBy = "categoria")
-    private Set<Producto> producto;*/
+    @Column(name = "FECHA", nullable = false, columnDefinition = "DATE")
+    private LocalDate fecha;
+    @ManyToOne
+    @JoinColumn(name = "CLIENTE_ID",nullable = false)
+    private Cliente cliente;
+    @ManyToOne
+    @JoinColumn(name = "PAGO_ID", nullable = false)
+    private Pago pago;
 }

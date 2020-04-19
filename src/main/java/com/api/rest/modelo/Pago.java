@@ -12,12 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  *
@@ -26,14 +21,10 @@ import lombok.Setter;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
 @Entity
-@Table(name = "CATEGORIA")
-public class Categoria implements Serializable {
+@Table(name = "PAGO")
+public class Pago implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "NOMBRE", nullable = false, length = 32)
-    private String nombre;
-    @Column(name = "DESCRIPCION",nullable = false, length = 32)
-    private String descripcion;
-    /*@OneToMany(mappedBy = "categoria")
-    private Set<Producto> producto;*/
+    private Integer id;    
+    @Column(name = "TIPOPAGO",nullable = false, length = 32)
+    private String tipopago;
 }
