@@ -13,8 +13,7 @@ import lombok.*;
  */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
-public class dtoCategoria {
-    private Integer id;
-    private String nombre;
-    private String descripcion;
+public class dtoPago {
+    private Integer id;    
+    private String tipopago;
 }

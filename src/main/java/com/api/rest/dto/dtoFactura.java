@@ -5,6 +5,7 @@
  */
 package com.api.rest.dto;
 
+import java.time.LocalDate;
 import lombok.*;
 
 /**
@@ -13,8 +14,9 @@ import lombok.*;
  */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
-public class dtoCategoria {
+public class dtoFactura {
     private Integer id;
-    private String nombre;
-    private String descripcion;
+    private LocalDate fecha;
+    private Integer cliente;
+    private Integer pago;
 }

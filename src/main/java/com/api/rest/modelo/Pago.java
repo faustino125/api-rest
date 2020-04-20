@@ -6,11 +6,13 @@
 package com.api.rest.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.*;
 
@@ -27,4 +29,7 @@ public class Pago implements Serializable {
     private Integer id;    
     @Column(name = "TIPOPAGO",nullable = false, length = 32)
     private String tipopago;
+    
+    @OneToMany(mappedBy = "pago")
+    private List<Factura> factura;
 }

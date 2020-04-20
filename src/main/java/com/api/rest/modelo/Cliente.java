@@ -6,11 +6,13 @@
 package com.api.rest.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.*;
 
@@ -33,4 +35,7 @@ public class Cliente implements Serializable {
     private String direccion;
     @Column(name = "TELEFONO", nullable = false, length = 12)
     private String telefono;   
+    
+    @OneToMany(mappedBy = "cliente")
+    private List<Factura> factura;
 }

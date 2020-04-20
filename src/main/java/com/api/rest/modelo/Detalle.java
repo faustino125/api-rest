@@ -8,6 +8,7 @@ package com.api.rest.modelo;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,10 +32,13 @@ public class Detalle implements Serializable {
     private Integer cantidad;
     @Column(name = "PRECIO",nullable = false)
     private float precio;
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCTO_ID")
     private Producto producto;
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FACTURA_ID")
     private Factura factura;
+    
 }

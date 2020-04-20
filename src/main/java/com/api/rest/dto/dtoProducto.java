@@ -13,8 +13,10 @@ import lombok.*;
  */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
-public class dtoCategoria {
+public class dtoProducto {
     private Integer id;
     private String nombre;
-    private String descripcion;
+    private float precio;
+    private Integer cantidad;
+    private Integer categoria;
 }

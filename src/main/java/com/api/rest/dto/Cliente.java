@@ -13,8 +13,10 @@ import lombok.*;
  */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
-public class dtoCategoria {
+public class Cliente {
     private Integer id;
     private String nombre;
-    private String descripcion;
+    private String apellido;
+    private String direccion;
+    private String telefono; 
 }

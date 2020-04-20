@@ -6,7 +6,6 @@
 package com.api.rest.repositorio;
 
 import com.api.rest.modelo.Categoria;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

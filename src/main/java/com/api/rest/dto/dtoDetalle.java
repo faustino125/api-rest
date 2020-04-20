@@ -6,15 +6,16 @@
 package com.api.rest.dto;
 
 import lombok.*;
-
 /**
  *
  * @author FAUSTINO
  */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
-public class dtoCategoria {
+public class dtoDetalle {
     private Integer id;
-    private String nombre;
-    private String descripcion;
+    private Integer cantidad;
+    private float precio;
+    private Integer producto;
+    private Integer factura;
 }
