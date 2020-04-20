@@ -5,6 +5,7 @@
  */
 package com.api.rest.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -31,5 +32,6 @@ public class Pago implements Serializable {
     private String tipopago;
     
     @OneToMany(mappedBy = "pago")
+    @JsonIgnore
     private List<Factura> factura;
 }

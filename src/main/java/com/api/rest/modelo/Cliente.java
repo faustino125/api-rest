@@ -5,6 +5,7 @@
  */
 package com.api.rest.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -20,12 +21,18 @@ import lombok.*;
  *
  * @author FAUSTINO
  */
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
-@Setter @Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Setter
+@Getter
 @Entity
 @Table(name = "CLIENTE")
 public class Cliente implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "NOMBRE", nullable = false, length = 32)
     private String nombre;
@@ -34,8 +41,9 @@ public class Cliente implements Serializable {
     @Column(name = "DIRECCION", nullable = false, length = 32)
     private String direccion;
     @Column(name = "TELEFONO", nullable = false, length = 12)
-    private String telefono;   
-    
+    private String telefono;
+
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Factura> factura;
 }

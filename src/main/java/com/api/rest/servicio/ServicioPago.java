@@ -5,10 +5,12 @@
  */
 package com.api.rest.servicio;
 
+import com.api.rest.excepcion.Errores;
 import com.api.rest.modelo.Pago;
 import com.api.rest.repositorio.RepositorioPago;
 import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,4 +25,12 @@ public class ServicioPago {
     public List<Pago> mostrarPago(){
     return this.repositorioPago.findAll();
     }
+    
+    public Pago buscarPOrId(Integer id){
+    return this.repositorioPago.findById(id).orElseThrow(()->{
+    String descripcion=String.format("No existe el id: ", id);
+    return new Errores(HttpStatus.NOT_FOUND, descripcion);
+    });
+    }
+    
 }

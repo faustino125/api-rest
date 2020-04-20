@@ -5,15 +5,15 @@
  */
 package com.api.rest.dto;
 
+import javax.persistence.Column;
 import lombok.*;
-
 /**
  *
  * @author FAUSTINO
  */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
-public class Cliente {
+public class dtoCliente {
     private Integer id;
     private String nombre;
     private String apellido;

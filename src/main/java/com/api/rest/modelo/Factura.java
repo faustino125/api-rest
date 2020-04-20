@@ -6,6 +6,7 @@
 package com.api.rest.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -40,5 +41,6 @@ public class Factura implements Serializable {
     private Pago pago;
     
     @OneToMany(mappedBy = "factura")
+    @JsonIgnore
     private List<Detalle> detalle;
 }

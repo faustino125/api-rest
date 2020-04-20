@@ -16,6 +16,6 @@ public class dtoDetalle {
     private Integer id;
     private Integer cantidad;
     private float precio;
-    private Integer producto;
-    private Integer factura;
+    private Integer productoId;
+    private Integer facturaId;
 }

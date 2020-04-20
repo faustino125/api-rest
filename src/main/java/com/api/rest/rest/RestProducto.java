@@ -36,8 +36,7 @@ public class RestProducto {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<dtoProducto> buscar() {
-        return this.servicioProducto
-                .buscar()
+        return this.servicioProducto.mostrarProducto()
                 .stream()
                 .map(producto -> this.modelMapper.map(producto, dtoProducto.class))
                 .collect(Collectors.toList());

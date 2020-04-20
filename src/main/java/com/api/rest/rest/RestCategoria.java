@@ -5,7 +5,6 @@ import com.api.rest.modelo.Categoria;
 import com.api.rest.servicio.ServicioCategoria;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
@@ -30,16 +29,15 @@ public class RestCategoria {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<dtoCategoria> buscar() {
-        return this.servicioCategoria
-                .buscar()
+    public List<dtoCategoria> mostrar() {
+        return this.servicioCategoria.mostarCategoria()
                 .stream()
                 .map(categoria -> this.modelMapper.map(categoria, dtoCategoria.class))
                 .collect(Collectors.toList());
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public dtoCategoria buscarPorId(@PathVariable Integer id) {
+    public dtoCategoria buscar(@PathVariable Integer id) {
         Categoria categoria = this.servicioCategoria.buscarPorId(id);
         return this.modelMapper.map(categoria, dtoCategoria.class);
     }

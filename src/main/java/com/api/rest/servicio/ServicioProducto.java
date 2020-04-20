@@ -22,7 +22,7 @@ public class ServicioProducto {
     @Resource
     private RepositorioProducto repositorioProducto;
 
-    public List<Producto> buscar() {
+    public List<Producto> mostrarProducto() {
         return this.repositorioProducto.findAll();
     }
     

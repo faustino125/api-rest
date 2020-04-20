@@ -7,16 +7,15 @@ package com.api.rest.dto;
 
 import java.time.LocalDate;
 import lombok.*;
-
 /**
  *
  * @author FAUSTINO
  */
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-@Setter @Getter
+@Setter @Generated
 public class dtoFactura {
     private Integer id;
     private LocalDate fecha;
-    private Integer cliente;
-    private Integer pago;
+    private Integer clienteId;
+    private Integer pagoId;
 }

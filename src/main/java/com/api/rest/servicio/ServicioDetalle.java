@@ -5,10 +5,12 @@
  */
 package com.api.rest.servicio;
 
+import com.api.rest.excepcion.Errores;
 import com.api.rest.modelo.Detalle;
 import com.api.rest.repositorio.RepositorioDetalle;
 import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,4 +26,12 @@ public class ServicioDetalle {
     public List<Detalle> mostrarDetalle() {
         return this.repositorioDetalle.findAll();
     }
+    
+    public Detalle buscarPorId(Integer id){
+    return this.repositorioDetalle.findById(id).orElseThrow(()->{
+    String descripcion=String.format("No existe id: ", id);
+    return new Errores(HttpStatus.NOT_FOUND, descripcion);
+    });
+    }
+    
 }

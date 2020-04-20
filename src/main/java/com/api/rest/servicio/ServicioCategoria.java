@@ -23,14 +23,14 @@ public class ServicioCategoria {
     @Resource
     private RepositorioCategoria repositorioCategoria;
 
-    public List<Categoria> buscar() {
+    public List<Categoria> mostarCategoria() {
         return this.repositorioCategoria.findAll();
     }
+
     public Categoria buscarPorId(Integer id) {
-        return this.repositorioCategoria
-                .findById(id).orElseThrow(() -> {
-                    String descripcion = String.format("No existe un puesto con el id '%s'", id);
-                    return new Errores(HttpStatus.NOT_FOUND, descripcion);
-                });
+        return this.repositorioCategoria.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe un puesto con el id '%s'", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
     }
 }
