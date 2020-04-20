@@ -5,6 +5,7 @@
  */
 package com.api.rest.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -44,7 +45,7 @@ public class Producto implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORIA_ID")
     private Categoria categoria;
-    
+   
     @OneToMany(mappedBy = "producto")
     private List<Detalle> detalle;
 }

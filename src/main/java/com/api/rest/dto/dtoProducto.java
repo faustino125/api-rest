@@ -11,12 +11,11 @@ import lombok.*;
  *
  * @author FAUSTINO
  */
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Setter @Getter
 public class dtoProducto {
     private Integer id;
     private String nombre;
     private float precio;
     private Integer cantidad;
-    private Integer categoria;
+    private Integer categoriaId;
 }

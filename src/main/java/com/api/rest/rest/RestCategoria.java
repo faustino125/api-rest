@@ -34,7 +34,7 @@ public class RestCategoria {
         return this.servicioCategoria
                 .buscar()
                 .stream()
-                .map(puesto -> this.modelMapper.map(puesto, dtoCategoria.class))
+                .map(categoria -> this.modelMapper.map(categoria, dtoCategoria.class))
                 .collect(Collectors.toList());
     }
     @ResponseStatus(HttpStatus.OK)
