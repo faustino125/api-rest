@@ -5,6 +5,7 @@
  */
 package com.api.rest.servicio;
 
+import com.api.rest.dto.dtoPago;
 import com.api.rest.excepcion.Errores;
 import com.api.rest.modelo.Pago;
 import com.api.rest.repositorio.RepositorioPago;
@@ -19,18 +20,25 @@ import org.springframework.stereotype.Service;
  */
 @Service("servicioPago")
 public class ServicioPago {
+
     @Resource
     private RepositorioPago repositorioPago;
-    
-    public List<Pago> mostrarPago(){
-    return this.repositorioPago.findAll();
+
+    public List<Pago> mostrarPago() {
+        return this.repositorioPago.findAll();
     }
-    
-    public Pago buscarPOrId(Integer id){
-    return this.repositorioPago.findById(id).orElseThrow(()->{
-    String descripcion=String.format("No existe el id: ", id);
-    return new Errores(HttpStatus.NOT_FOUND, descripcion);
-    });
+
+    public Pago buscarPOrId(Integer id) {
+        return this.repositorioPago.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id: ", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
     }
-    
+
+    public Pago agregar(dtoPago dto){
+     Pago pago=new Pago();
+     pago.setTipopago(dto.getTipopago());
+     this.repositorioPago.save(pago);
+     return pago;
+    }
 }

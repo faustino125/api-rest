@@ -5,6 +5,7 @@
  */
 package com.api.rest.servicio;
 
+import com.api.rest.dto.dtoCliente;
 import com.api.rest.excepcion.Errores;
 import com.api.rest.modelo.Cliente;
 import com.api.rest.repositorio.RepositorioCliente;
@@ -32,5 +33,15 @@ public class ServicioCliente {
             String descripcion = String.format("No existe el id: ", id);
             return new Errores(HttpStatus.NOT_FOUND, descripcion);
         });
+    }
+
+    public Cliente agregar(dtoCliente dto) {
+        Cliente cliente = new Cliente();
+        cliente.setNombre(dto.getNombre());
+        cliente.setApellido(dto.getApellido());
+        cliente.setDireccion(dto.getDireccion());
+        cliente.setTelefono(dto.getTelefono());
+        this.repositorioCliente.save(cliente);
+        return cliente;
     }
 }

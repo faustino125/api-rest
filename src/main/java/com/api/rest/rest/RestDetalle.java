@@ -11,11 +11,14 @@ import com.api.rest.servicio.ServicioDetalle;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +48,13 @@ public class RestDetalle {
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public dtoDetalle buscar(@PathVariable Integer id) {
         Detalle detalle = this.servicioDetalle.buscarPorId(id);
+        return this.modelMapper.map(detalle, dtoDetalle.class);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public dtoDetalle agregar(@RequestBody @Valid dtoDetalle dto) {
+        Detalle detalle = this.servicioDetalle.agregar(dto);
         return this.modelMapper.map(detalle, dtoDetalle.class);
     }
 }
