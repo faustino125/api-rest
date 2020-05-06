@@ -28,17 +28,35 @@ public class ServicioPago {
         return this.repositorioPago.findAll();
     }
 
-    public Pago buscarPOrId(Integer id) {
+    public Pago buscarPorId(Integer id) {
         return this.repositorioPago.findById(id).orElseThrow(() -> {
             String descripcion = String.format("No existe el id: ", id);
             return new Errores(HttpStatus.NOT_FOUND, descripcion);
         });
     }
 
-    public Pago agregar(dtoPago dto){
-     Pago pago=new Pago();
-     pago.setTipopago(dto.getTipopago());
-     this.repositorioPago.save(pago);
-     return pago;
+    public Pago agregar(dtoPago dto) {
+        Pago pago = new Pago();
+        pago.setTipopago(dto.getTipopago());
+        this.repositorioPago.save(pago);
+        return pago;
+    }
+
+    public Pago actualizar(Integer id, dtoPago dto) {
+        Pago pago = repositorioPago.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id: ", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
+        pago.setTipopago(dto.getTipopago());
+        this.repositorioPago.save(pago);
+        return pago;
+    }
+
+    public void eliminar(Integer id) {
+        Pago pago = repositorioPago.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id: ", id);
+            return new Errores(HttpStatus.OK, descripcion);
+        });
+        repositorioPago.delete(pago);
     }
 }

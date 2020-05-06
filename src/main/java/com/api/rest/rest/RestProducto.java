@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -57,5 +58,11 @@ public class RestProducto {
     public dtoProducto agregar(@RequestBody @Valid dtoProducto dto) {
         Producto producto = this.servicioProducto.agregar(dto);
         return this.modelMapper.map(producto, dtoProducto.class);
+    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public dtoProducto actualizar(@PathVariable Integer id,@RequestBody @Valid dtoProducto dto){
+    Producto producto=this.servicioProducto.actualizar(id, dto);
+    return this.modelMapper.map(producto, dtoProducto.class);
     }
 }

@@ -30,13 +30,24 @@ public class ServicioCategoria {
 
     public Categoria buscarPorId(Integer id) {
         return this.repositorioCategoria.findById(id).orElseThrow(() -> {
-            String descripcion = String.format("No existe un puesto con el id '%s'", id);
+            String descripcion = String.format("No existe el id: ", id);
             return new Errores(HttpStatus.NOT_FOUND, descripcion);
         });
     }
 
     public Categoria agregar(dtoCategoria dto) {
         Categoria categoria = new Categoria();
+        categoria.setNombre(dto.getNombre());
+        categoria.setDescripcion(dto.getDescripcion());
+        this.repositorioCategoria.save(categoria);
+        return categoria;
+    }
+
+    public Categoria actualizar(Integer id, dtoCategoria dto) {
+        Categoria categoria = repositorioCategoria.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id: ", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
         categoria.setNombre(dto.getNombre());
         categoria.setDescripcion(dto.getDescripcion());
         this.repositorioCategoria.save(categoria);

@@ -29,8 +29,7 @@ public class ServicioFactura {
     private ServicioPago servicioPago;
     @Resource
     private ServicioCliente servicioCliente;
-            
-            
+
     public List<Factura> mostrarFactura() {
         return this.repositorioFactura.findAll();
     }
@@ -42,15 +41,28 @@ public class ServicioFactura {
         });
     }
 
-    public Factura agregar(dtoFactura dto){
-        Cliente cliente=this.servicioCliente.buscarPorId(dto.getClienteId());
-        Pago pago = this.servicioPago.buscarPOrId(dto.getPagoId());
-        Factura factura=new Factura();
+    public Factura agregar(dtoFactura dto) {
+        Cliente cliente = this.servicioCliente.buscarPorId(dto.getClienteId());
+        Pago pago = this.servicioPago.buscarPorId(dto.getPagoId());
+        Factura factura = new Factura();
         factura.setFecha(dto.getFecha());
         factura.setCliente(cliente);
         factura.setPago(pago);
         this.repositorioFactura.save(factura);
         return factura;
     }
-        
+
+    public Factura actualizar(Integer id, dtoFactura dto) {
+        Cliente cliente = this.servicioCliente.buscarPorId(dto.getClienteId());
+        Pago pago = this.servicioPago.buscarPorId(dto.getPagoId());
+        Factura factura = repositorioFactura.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id:", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
+        factura.setFecha(dto.getFecha());
+        factura.setCliente(cliente);
+        factura.setPago(pago);
+        this.repositorioFactura.save(factura);
+        return factura;
+    }
 }

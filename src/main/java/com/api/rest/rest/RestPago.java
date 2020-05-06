@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +51,7 @@ public class RestPago {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public dtoPago buscar(@PathVariable Integer id) {
-        Pago pago = this.servicioPago.buscarPOrId(id);
+        Pago pago = this.servicioPago.buscarPorId(id);
         return this.modelMapper.map(pago, dtoPago.class);
     }
     
@@ -60,4 +62,16 @@ public class RestPago {
         return this.modelMapper.map(pago, dtoPago.class);
     }
     
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping(path = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public dtoPago actualizarPago(@PathVariable Integer id, @RequestBody @Valid dtoPago dto){
+        Pago pago=this.servicioPago.actualizar(id, dto);
+        return this.modelMapper.map(pago, dtoPago.class);
+    }
+    
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(path = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public void eliminar(@PathVariable Integer id){
+    this.servicioPago.eliminar(id);
+    }
 }

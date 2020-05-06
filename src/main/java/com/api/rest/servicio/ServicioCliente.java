@@ -44,4 +44,18 @@ public class ServicioCliente {
         this.repositorioCliente.save(cliente);
         return cliente;
     }
+
+    public Cliente actualizar(Integer id, dtoCliente dto) {
+        Cliente cliente = repositorioCliente.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id: ", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
+        cliente.setNombre(dto.getNombre());
+        cliente.setApellido(dto.getApellido());
+        cliente.setDireccion(dto.getDireccion());
+        cliente.setTelefono(dto.getTelefono());
+        this.repositorioCliente.save(cliente);
+        return cliente;
+
+    }
 }

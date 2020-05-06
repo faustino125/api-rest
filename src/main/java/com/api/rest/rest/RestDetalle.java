@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -56,5 +57,11 @@ public class RestDetalle {
     public dtoDetalle agregar(@RequestBody @Valid dtoDetalle dto) {
         Detalle detalle = this.servicioDetalle.agregar(dto);
         return this.modelMapper.map(detalle, dtoDetalle.class);
+    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping(path = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public dtoDetalle actualizar(@PathVariable Integer id,@RequestBody @Valid dtoDetalle dto){
+    Detalle detalle=this.servicioDetalle.actualizar(id, dto);
+    return  this.modelMapper.map(detalle, dtoDetalle.class);
     }
 }

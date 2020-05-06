@@ -49,4 +49,18 @@ public class ServicioProducto {
         return producto;
     }
 
+    public Producto actualizar(Integer id, dtoProducto dto) {
+        Categoria categoria = this.servicioCategoria.buscarPorId(dto.getCategoriaId());
+        
+        Producto producto = repositorioProducto.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id: ", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
+        producto.setNombre(dto.getNombre());
+        producto.setPrecio(dto.getPrecio());
+        producto.setCantidad(dto.getCantidad());
+        producto.setCategoria(categoria);
+        this.repositorioProducto.save(producto);
+        return producto;
+    }
 }

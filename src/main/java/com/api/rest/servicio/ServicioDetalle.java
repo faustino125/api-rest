@@ -52,4 +52,19 @@ public class ServicioDetalle {
         this.repositorioDetalle.save(detalle);
         return detalle;
     }
+
+    public Detalle actualizar(Integer id, dtoDetalle dto) {
+        Factura factura = this.servicioFactura.buscarPorId(dto.getFacturaId());
+        Producto producto = this.servicioProducto.buscarPorId(dto.getProductoId());
+        Detalle detalle = repositorioDetalle.findById(id).orElseThrow(() -> {
+            String descripcion = String.format("No existe el id: ", id);
+            return new Errores(HttpStatus.NOT_FOUND, descripcion);
+        });
+        detalle.setCantidad(dto.getCantidad());
+        detalle.setPrecio(dto.getPrecio());
+        detalle.setProducto(producto);
+        detalle.setFactura(factura);
+        this.repositorioDetalle.save(detalle);
+        return detalle;
+    }
 }
