@@ -5,13 +5,17 @@
  */
 package com.api.rest.rest;
 
+import com.api.rest.constante.EncabezadoHttp;
 import com.api.rest.dto.dtoPago;
 import com.api.rest.modelo.Pago;
 import com.api.rest.servicio.ServicioPago;
+import com.api.rest.servicio.ServicoReporte;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import net.sf.jasperreports.engine.JRException;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +44,9 @@ public class RestPago {
     @Resource
     private ServicioPago servicioPago;
 
+    @Resource
+    private ServicoReporte servicioReporte;
+    
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<dtoPago> mostrar() {
@@ -73,5 +81,10 @@ public class RestPago {
     @DeleteMapping(path = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public void eliminar(@PathVariable Integer id){
     this.servicioPago.eliminar(id);
+    }    
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/reporte")
+    public byte[] generarArchivo() throws FileNotFoundException, JRException {
+    return this.servicioReporte.exportarPagoPDF();
     }
 }
